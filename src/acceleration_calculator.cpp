@@ -9,7 +9,8 @@ double calculate_acceleration(
   double start_height,
   double radius,
   double drag_coefficient,
-  double time
+  double time,
+  double air_density
 ) {
   assert(collected_data_size >= 0);
 
@@ -30,7 +31,8 @@ double calculate_acceleration(
     height,
     radius,
     drag_coefficient,
-    velocity
+    velocity,
+    air_density
   );
 
 

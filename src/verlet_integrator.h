@@ -57,6 +57,8 @@ struct AccelerationCalculationData {
    * @brief Mass of fuel-empty rocket in kilograms
    */
   double base_mass;
+
+  double air_density = -1;
 };
 
 /**
