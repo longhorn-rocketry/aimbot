@@ -24,8 +24,7 @@ double calculate_drag(
   double height,
   double radius,
   double drag_coefficient,
-  double velocity,
-  double air_density=-1
+  double velocity
 );
 
 #endif // _CURVE_GEN_CONSTANT_AREA_DRAG_CALCULATOR_H_

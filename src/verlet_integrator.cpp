@@ -56,8 +56,8 @@ void VerletIntegrator::Simulate(double *data_array, std::size_t data_array_size,
       this->initial_value(),
       acceleration_data.radius,
       acceleration_data.drag_coefficient,
-      0.0,  // Time is irrelevant in acceleration calculation when collected_data array is empty
-      acceleration_data.air_density);
+      0.0  // Time is irrelevant in acceleration calculation when collected_data array is empty
+    );
     double altitude = (2 * height - data_array[i - 2] + acceleration *
       timestep * timestep);
 

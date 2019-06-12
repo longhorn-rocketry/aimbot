@@ -23,8 +23,7 @@ double calculate_acceleration(
   double start_height,
   double radius,
   double drag_coefficient,
-  double time,
-  double air_density=-1
+  double time
 );
 
 #endif // _CURVE_GEN_ACCELERATION_CALCULATOR_H_
