@@ -22,7 +22,7 @@
 double calculate_drag(
   double start_height,
   double height,
-  double radius,
+  double surface_area,
   double drag_coefficient,
   double velocity
 );

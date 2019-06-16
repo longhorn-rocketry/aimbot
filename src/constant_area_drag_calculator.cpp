@@ -5,7 +5,7 @@
 double calculate_drag(
   double start_height,
   double height,
-  double radius,
+  double surface_area,
   double drag_coefficient,
   double velocity
 ) {
@@ -15,9 +15,9 @@ double calculate_drag(
   assert(drag_coefficient >= 0.0);
   assert(velocity >= 0.0);*/
 
-  double air_density = calculate_density(start_height, height);
-  double area = _PI * radius * radius;
+  double density = calculate_density(start_height, height);
+  // double area = _PI * radius * radius;
 
-  return (0.5 * air_density * velocity * velocity *
-    drag_coefficient * area);
+  return (0.5 * density * velocity * velocity *
+    drag_coefficient * surface_area);
 }

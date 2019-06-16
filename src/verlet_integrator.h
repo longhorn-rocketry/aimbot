@@ -11,7 +11,7 @@
 // The higher this number, more intricate the velocity calculation is
 #define PAST_NUM_STEPS 5
 
-#include <cstddef>
+// #include <cstddef>
 
 /**
  * @brief Structure of data required for initialization for a VerletIntegrator
@@ -46,19 +46,26 @@ struct AccelerationCalculationData {
   /**
    * @brief Dimensionless drag constant associated with Reynold's number
    */
-  double drag_coefficient;
+  // double drag_coefficient;
 
   /**
    * @brief Radius of rocket tube in meters
    */
-  double radius;
+  // double radius;
 
   /**
    * @brief Mass of fuel-empty rocket in kilograms
    */
-  double base_mass;
+  // double base_mass;
 
-  double air_density = -1;
+  double mass;
+  double velocity;
+  double altitude;
+  double altitude_initial;
+  double rocket_surface_area;
+  double airbrake_surface_area;
+  double rocket_cd;
+  double airbrake_cd;
 };
 
 /**
@@ -90,7 +97,7 @@ public:
    *  than or equal to `data_array_size`
    * @return double
    */
-  double CalculateVelocity(double *data_array, std::size_t data_array_size,
+  double CalculateVelocity(double *data_array, int data_array_size,
                            unsigned int index, double timestep);
 
   /**
@@ -99,7 +106,7 @@ public:
    * @param data_array array of data where the results will be stored
    * @param data_array_size size of data array
    */
-  void Simulate(double *data_array, std::size_t data_array_size,
+  void Simulate(double *data_array, int data_array_size,
                 double timestep,
                 const struct AccelerationCalculationData &acceleration_data);
 

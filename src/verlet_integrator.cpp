@@ -7,10 +7,11 @@
 
 #include "verlet_integrator.h"
 
-#include <algorithm> // std::min
-#include <cassert>   // assert
-#include <cstddef>   // std::size_t
-#include <vector>
+// #include <algorithm> // std::min
+// #include <cassert>   // assert
+// #include <cstddef>   // std::size_t
+// #include <vector>
+// #include <iostream>
 
 #include "acceleration_calculator.h"
 
@@ -23,9 +24,11 @@ VerletIntegrator::VerletIntegrator(struct InitializationData initialization_data
       start_time_(initialization_data.start_time) {}
 
 double VerletIntegrator::CalculateVelocity(double *data_array,
-                                           size_t data_array_size,
+                                           int data_array_size,
                                            unsigned int index,
                                            double timestep) {
+  /*if (index > data_array_size)
+    throw "index must be <= data_array_size";
 
   unsigned int num_samples = std::min(VerletIntegrator::kPastNumSteps, index - 1);
   double sum = 0.0;
@@ -33,13 +36,14 @@ double VerletIntegrator::CalculateVelocity(double *data_array,
     sum += (data_array[index - 1 - i] - data_array[index - 2 - i]);
   }
 
-  return sum / (timestep * num_samples);
+  return sum / (timestep * num_samples);*/
+  return 0;
 }
 
-void VerletIntegrator::Simulate(double *data_array, std::size_t data_array_size,
+void VerletIntegrator::Simulate(double *data_array, int data_array_size,
                                 double timestep,
                                 const struct AccelerationCalculationData &acceleration_data) {
-  assert(data_array_size > 2);
+  /*assert(data_array_size > 2);
 
   data_array[0] = this->initial_value();
   data_array[1] = data_array[0] + this->initial_velocity();
@@ -56,19 +60,18 @@ void VerletIntegrator::Simulate(double *data_array, std::size_t data_array_size,
       this->initial_value(),
       acceleration_data.radius,
       acceleration_data.drag_coefficient,
-      0.0  // Time is irrelevant in acceleration calculation when collected_data array is empty
-    );
+      0.0);  // Time is irrelevant in acceleration calculation when collected_data array is empty
     double altitude = (2 * height - data_array[i - 2] + acceleration *
       timestep * timestep);
 
     data_array[i] = altitude;
-  }
+  }*/
 }
 
 double VerletIntegrator::SimulateApogeeVerlet(double timestep, const struct
   AccelerationCalculationData &acceleration_data) {
 
-  std::vector<double> data;
+  /*std::vector<double> data;
   data.push_back(initial_value());
   data.push_back(data[0] + initial_velocity() * timestep);
 
@@ -96,27 +99,27 @@ double VerletIntegrator::SimulateApogeeVerlet(double timestep, const struct
     i++;
   }
 
-  return altitude;
+  return altitude;*/
+
+  return 0;
 }
 
 double VerletIntegrator::SimulateApogeeEuler(double timestep,
-  const struct AccelerationCalculationData &acceleration_data) {
+  const struct AccelerationCalculationData &acalc_params) {
 
-  double altitude = initial_value();
-  double velocity = initial_velocity();
+  double altitude = acalc_params.altitude;
+  double velocity = acalc_params.velocity;
 
   while (velocity > 0) {
     double accel = calculate_acceleration(
-      NULL,
-      0,
-      acceleration_data.base_mass,
-      velocity,
-      altitude,
-      0,
-      acceleration_data.radius,
-      acceleration_data.drag_coefficient,
-      0
-    );
+        acalc_params.mass,
+        velocity,
+        altitude,
+        acalc_params.altitude_initial,
+        acalc_params.rocket_surface_area,
+        acalc_params.airbrake_surface_area,
+        acalc_params.rocket_cd,
+        acalc_params.airbrake_cd);
     velocity += accel * timestep;
     altitude += velocity * timestep;
   }
