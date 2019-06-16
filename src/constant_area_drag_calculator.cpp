@@ -1,6 +1,6 @@
 #include "constant_area_drag_calculator.h"
 
-#include <cassert>
+// #include <cassert>
 
 double calculate_drag(
   double start_height,

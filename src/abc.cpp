@@ -2,7 +2,7 @@
 #include "control_util.h"
 
 #include <math.h>
-#include <string>
+// #include <string>
 
 bool abc::t_conv_is_realistic(float t_conv, float t_now) {
   return t_conv > 0 &&

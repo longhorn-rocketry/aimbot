@@ -1,10 +1,10 @@
 #include "interpolate.h"
 
-#include <cassert>
+// #include <cassert>
 #include <utility>
 
 int64_t BinarySearch(std::pair<double, double> *array, size_t array_size, double key) {
-  assert(array_size > 0);
+  // assert(array_size > 0);
 
   size_t index_min = 0;
   size_t index_max = array_size;
