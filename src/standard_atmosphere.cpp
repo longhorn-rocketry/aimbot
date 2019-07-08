@@ -1,62 +1,61 @@
 #include "standard_atmosphere.hpp"
 
-namespace aimbot {
+namespace atmos {
 
-float atmos::interpolate_linear(float kA, float kB, float kP) {
+float interpolate_linear(float kA, float kB, float kP) {
   return kA + (kB - kA) * kP;
 }
 
-int atmos::closest_conditions_index(float kAltitude) {
-  if (kAltitude < atmos::STANDARD_ATMOSPHERE[0].altitude)
-    return atmos::ATMOS_ERROR;
+int closest_conditions_index(float kAltitude) {
+  if (kAltitude < STANDARD_ATMOSPHERE[0].altitude)
+    return ATMOS_ERROR;
 
-  for (int i = 1; i < atmos::STANDARD_ATMOSPHERE_SIZE; i++)
-    if (atmos::STANDARD_ATMOSPHERE[i].altitude >= kAltitude)
+  for (int i = 1; i < STANDARD_ATMOSPHERE_SIZE; i++)
+    if (STANDARD_ATMOSPHERE[i].altitude >= kAltitude)
       return i - 1;
 
-  return atmos::ATMOS_ERROR;
+  return ATMOS_ERROR;
 }
 
-float atmos::read_atmos_t_value(const atmos_t* kAtmos, unsigned int kOffset) {
+float read_atmos_t_value(const atmos_t* kAtmos, unsigned int kOffset) {
   const char* alias = (char*)kAtmos;
   return *((float*)(alias + kOffset));
 }
 
-float atmos::interpolate_atmos_t_value(float kAltitude, unsigned int kOffset) {
-  int index = atmos::closest_conditions_index(kAltitude);
+float interpolate_atmos_t_value(float kAltitude, unsigned int kOffset) {
+  int index = closest_conditions_index(kAltitude);
 
-  if (index != atmos::ATMOS_ERROR) {
-    const atmos::atmos_t& conditions_low = atmos::STANDARD_ATMOSPHERE[index];
-    const atmos::atmos_t& conditions_high = atmos::STANDARD_ATMOSPHERE[index+1];
-    float val_low = atmos::read_atmos_t_value(&conditions_low, kOffset);
-    float val_high = atmos::read_atmos_t_value(&conditions_high, kOffset);
+  if (index != ATMOS_ERROR) {
+    const atmos_t& conditions_low = STANDARD_ATMOSPHERE[index];
+    const atmos_t& conditions_high = STANDARD_ATMOSPHERE[index+1];
+    float val_low = read_atmos_t_value(&conditions_low, kOffset);
+    float val_high = read_atmos_t_value(&conditions_high, kOffset);
     float p = (kAltitude - conditions_low.altitude)
               / (conditions_high.altitude - conditions_low.altitude);
-    return atmos::interpolate_linear(val_low, val_high, p);
+    return interpolate_linear(val_low, val_high, p);
   }
 
-  return atmos::ATMOS_ERROR;
+  return ATMOS_ERROR;
 }
 
-float atmos::temperature_at(float kAltitude) {
-  return atmos::interpolate_atmos_t_value(kAltitude, TEMPERATURE_BYTE_OFFSET);
+float temperature_at(float kAltitude) {
+  return interpolate_atmos_t_value(kAltitude, TEMPERATURE_BYTE_OFFSET);
 }
 
-float atmos::gravity_at(float kAltitude) {
-  return atmos::interpolate_atmos_t_value(kAltitude, GRAVITY_BYTE_OFFSET);
+float gravity_at(float kAltitude) {
+  return interpolate_atmos_t_value(kAltitude, GRAVITY_BYTE_OFFSET);
 }
 
-float atmos::pressure_at(float kAltitude) {
-  return atmos::interpolate_atmos_t_value(kAltitude, PRESSURE_BYTE_OFFSET);
+float pressure_at(float kAltitude) {
+  return interpolate_atmos_t_value(kAltitude, PRESSURE_BYTE_OFFSET);
 }
 
-float atmos::air_density_at(float kAltitude) {
-  return atmos::interpolate_atmos_t_value(kAltitude, AIR_DENSITY_BYTE_OFFSET);
+float air_density_at(float kAltitude) {
+  return interpolate_atmos_t_value(kAltitude, AIR_DENSITY_BYTE_OFFSET);
 }
 
-float atmos::dynamic_viscosity_at(float kAltitude) {
-  return atmos::interpolate_atmos_t_value(kAltitude,
-                                          DYNAMIC_VISCOSITY_BYTE_OFFSET);
+float dynamic_viscosity_at(float kAltitude) {
+  return interpolate_atmos_t_value(kAltitude, DYNAMIC_VISCOSITY_BYTE_OFFSET);
 }
 
 }; // end namespace aimbot
