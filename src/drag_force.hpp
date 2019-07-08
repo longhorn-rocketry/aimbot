@@ -18,13 +18,13 @@ typedef struct RocketState {
   float velocity;
 } state_t;
 
-float simple_drag_force(const rocket_t& kRocket, const state_t& kState);
+float simple_drag_force(const rocket_t& k_rocket, const state_t& k_state);
 
-static float net_acceleration(const rocket_t& kRocket,
-                              const state_t& kState,
+static float net_acceleration(const rocket_t& k_rocket,
+                              const state_t& k_state,
                               float kDragForce);
 
-float simple_net_acceleration(const rocket_t& kRocket, const state_t& kState);
+float simple_net_acceleration(const rocket_t& k_rocket, const state_t& k_state);
 
 }; // end namespace aimbot
 

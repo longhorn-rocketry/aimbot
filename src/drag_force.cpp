@@ -3,23 +3,25 @@
 
 namespace aimbot {
 
-float simple_drag_force(const rocket_t& kRocket, const state_t& kState) {
-  float air_density = atmos::air_density_at(kState.altitude);
-  return 0.5 * air_density * kState.velocity * kState.velocity
-         * kRocket.drag_coefficient * kRocket.surface_area;
+float simple_drag_force(const rocket_t& k_rocket, const state_t& k_state) {
+  float air_density = atmos::air_density_at(k_state.altitude);
+  return 0.5 * air_density * k_state.velocity * k_state.velocity
+         * k_rocket.drag_coefficient * k_rocket.surface_area;
 }
 
-float net_acceleration(const rocket_t& kRocket,
-                       const state_t& kState,
+float net_acceleration(const rocket_t& k_rocket,
+                       const state_t& k_state,
                        float kDragForce)
 {
-  float gravity = atmos::gravity_at(kState.altitude);
-  return -(kDragForce / kRocket.mass) - gravity;
+  float gravity = atmos::gravity_at(k_state.altitude);
+  return -(kDragForce / k_rocket.mass) - gravity;
 }
 
-float simple_net_acceleration(const rocket_t& kRocket, const state_t& kState) {
-  float drag = simple_drag_force(kRocket, kState);
-  return net_acceleration(kRocket, kState, drag);
+float simple_net_acceleration(const rocket_t& k_rocket,
+                              const state_t& k_state)
+{
+  float drag = simple_drag_force(k_rocket, k_state);
+  return net_acceleration(k_rocket, k_state, drag);
 }
 
 }; // end namespace aimbot

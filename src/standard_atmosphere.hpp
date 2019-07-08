@@ -40,23 +40,23 @@ static const unsigned int STANDARD_ATMOSPHERE_SIZE = 11;
 
 const int ATMOS_ERROR = -1;
 
-static float read_atmos_t_value(const atmos_t* kAtmos, unsigned int kOffset);
+static float read_atmos_t_value(const atmos_t* k_atmos, unsigned int k_offset);
 
-static float interpolate_atmos_t_value(float kAltitude, unsigned int kOffset);
+static float interpolate_atmos_t_value(float k_altitude, unsigned int k_offset);
 
-static float interpolate_linear(float kA, float kB, float kP);
+static float interpolate_linear(float k_a, float k_b, float k_p);
 
-static int closest_conditions_index(float kAltitude);
+static int closest_conditions_index(float k_altitude);
 
-float temperature_at(float kAltitude);
+float temperature_at(float k_altitude);
 
-float gravity_at(float kAltitude);
+float gravity_at(float k_altitude);
 
-float pressure_at(float kAltitude);
+float pressure_at(float k_altitude);
 
-float air_density_at(float kAltitude);
+float air_density_at(float k_altitude);
 
-float dynamic_viscosity_at(float kAltitude);
+float dynamic_viscosity_at(float k_altitude);
 
 }; // end namespace atmos
 
