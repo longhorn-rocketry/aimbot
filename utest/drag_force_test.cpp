@@ -15,6 +15,7 @@ TEST_GROUP(DragForceTest)
 TEST(DragForceTest, SimpleDragForce)
 {
   rocket_t rocket;
+  rocket.mass = 35;
   rocket.radius = 0.0762;
   rocket.surface_area = PI * rocket.radius * rocket.radius;
   rocket.drag_coefficient = 0.46;
@@ -26,6 +27,10 @@ TEST(DragForceTest, SimpleDragForce)
   float f = simple_drag_force(rocket, state);
   float f_exp = 291.589;
 
-  if (!util::approx(f, f_exp))
-    NOT_APPROX(f, f_exp);
+  CHECK_APPROX(f, f_exp);
+
+  float a = simple_net_acceleration(rocket, state);
+  float a_exp = -f_exp / rocket.mass - 9.804;
+
+  CHECK_APPROX(a, a_exp);
 }

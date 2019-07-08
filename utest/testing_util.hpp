@@ -1,10 +1,11 @@
 #ifndef TESTING_UTIL_HPP
 #define TESTING_UTIL_HPP
 
-#define NOT_APPROX(f, f_exp) {                                                 \
-          std::string s = util::not_approx_msg(f, f_exp);                      \
-          FAIL(s.c_str());                                                     \
-        }
+#define CHECK_APPROX(f, f_exp)                                                 \
+          if (!util::approx(f, f_exp)) {                                       \
+            std::string s = util::not_approx_msg(f, f_exp);                    \
+            FAIL(s.c_str());                                                   \
+          }
 
 #include <string>
 

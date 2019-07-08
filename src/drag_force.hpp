@@ -4,7 +4,7 @@
 namespace aimbot {
 
 typedef struct RocketProperties {
-  float dry_mass;
+  float mass;
   float radius;
   float surface_area;
   float drag_coefficient;
@@ -19,6 +19,12 @@ typedef struct RocketState {
 } state_t;
 
 float simple_drag_force(const rocket_t& kRocket, const state_t& kState);
+
+static float net_acceleration(const rocket_t& kRocket,
+                              const state_t& kState,
+                              float kDragForce);
+
+float simple_net_acceleration(const rocket_t& kRocket, const state_t& kState);
 
 }; // end namespace aimbot
 
