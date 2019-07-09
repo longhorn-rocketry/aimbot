@@ -1,5 +1,5 @@
-make unit_test:
-	g++ -std=c++11 unit_test_main.cpp -o unit_test -lCppUTest -I../src/          \
+make:
+	g++ -std=c++11 unit_test_main.cpp -o utest.a -lCppUTest -I../src/            \
 	atmos_test.cpp                                                               \
 	drag_force_test.cpp                                                          \
 	struct_util_test.cpp                                                         \
@@ -19,4 +19,4 @@ make unit_test:
 	../src/curve_generation.hpp
 
 make clean:
-	rm unit_test
+	rm utest
