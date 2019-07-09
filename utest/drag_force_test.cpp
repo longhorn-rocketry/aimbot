@@ -2,6 +2,7 @@
 #include <string>
 
 #include "drag_force.hpp"
+#include "standard_atmosphere.hpp"
 #include "testing_util.hpp"
 
 #define PI 3.14159265359
@@ -30,7 +31,7 @@ TEST(DragForceTest, SimpleDragForce)
   CHECK_APPROX(f, f_exp);
 
   float a = simple_net_acceleration(rocket, state);
-  float a_exp = -f_exp / rocket.mass - 9.804;
+  float a_exp = -f_exp / rocket.mass - atmos::gravity_at(state.altitude);
 
   CHECK_APPROX(a, a_exp);
 }

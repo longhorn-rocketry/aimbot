@@ -7,6 +7,7 @@ typedef struct RocketProperties {
   float mass;
   float radius;
   float surface_area;
+  float airbrake_surface_area;
   float drag_coefficient;
   float nosecone_length;
   float fineness;
