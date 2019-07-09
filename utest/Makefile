@@ -4,6 +4,7 @@ make unit_test:
 	drag_force_test.cpp                                                          \
 	struct_util_test.cpp                                                         \
 	cd_schedule_test.cpp                                                         \
+	curve_gen_test.cpp                                                           \
 	testing_util.cpp                                                             \
 	testing_util.hpp                                                             \
 	../src/standard_atmosphere.cpp                                               \
@@ -13,7 +14,9 @@ make unit_test:
 	../src/struct_util.cpp                                                       \
 	../src/struct_util.hpp                                                       \
 	../src/cd_schedule.cpp                                                       \
-	../src/cd_schedule.hpp
+	../src/cd_schedule.hpp                                                       \
+	../src/curve_generation.cpp                                                  \
+	../src/curve_generation.hpp
 
 make clean:
 	rm unit_test
