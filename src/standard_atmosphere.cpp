@@ -1,4 +1,5 @@
 #include "standard_atmosphere.hpp"
+#include "struct_util.hpp"
 
 namespace atmos {
 
@@ -7,14 +8,11 @@ float interpolate_linear(float k_a, float k_b, float k_p) {
 }
 
 int closest_conditions_index(float k_altitude) {
-  if (k_altitude < STANDARD_ATMOSPHERE[0].altitude)
-    return ATMOS_ERROR;
-
-  for (int i = 1; i < STANDARD_ATMOSPHERE_SIZE; i++)
-    if (STANDARD_ATMOSPHERE[i].altitude >= k_altitude)
-      return i - 1;
-
-  return ATMOS_ERROR;
+  return aimbot::float_struct_binsearch(&STANDARD_ATMOSPHERE,
+                                        k_altitude,
+                                        STANDARD_ATMOSPHERE_SIZE,
+                                        sizeof(atmos_t),
+                                        0);
 }
 
 float read_atmos_t_value(const atmos_t* k_atmos, unsigned int k_offset) {
@@ -25,17 +23,15 @@ float read_atmos_t_value(const atmos_t* k_atmos, unsigned int k_offset) {
 float interpolate_atmos_t_value(float k_altitude, unsigned int k_offset) {
   int index = closest_conditions_index(k_altitude);
 
-  if (index != ATMOS_ERROR) {
-    const atmos_t& conditions_low = STANDARD_ATMOSPHERE[index];
-    const atmos_t& conditions_high = STANDARD_ATMOSPHERE[index+1];
-    float val_low = read_atmos_t_value(&conditions_low, k_offset);
-    float val_high = read_atmos_t_value(&conditions_high, k_offset);
-    float p = (k_altitude - conditions_low.altitude)
-              / (conditions_high.altitude - conditions_low.altitude);
-    return interpolate_linear(val_low, val_high, p);
-  }
+  const atmos_t& conditions_low = STANDARD_ATMOSPHERE[index - 1];
+  const atmos_t& conditions_high = STANDARD_ATMOSPHERE[index];
 
-  return ATMOS_ERROR;
+  float val_low = read_atmos_t_value(&conditions_low, k_offset);
+  float val_high = read_atmos_t_value(&conditions_high, k_offset);
+  float p = (k_altitude - conditions_low.altitude)
+            / (conditions_high.altitude - conditions_low.altitude);
+
+  return interpolate_linear(val_low, val_high, p);
 }
 
 float temperature_at(float k_altitude) {

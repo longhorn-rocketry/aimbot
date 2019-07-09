@@ -44,7 +44,7 @@ static float read_atmos_t_value(const atmos_t* k_atmos, unsigned int k_offset);
 
 static float interpolate_atmos_t_value(float k_altitude, unsigned int k_offset);
 
-static float interpolate_linear(float k_a, float k_b, float k_p);
+float interpolate_linear(float k_a, float k_b, float k_p);
 
 static int closest_conditions_index(float k_altitude);
 
