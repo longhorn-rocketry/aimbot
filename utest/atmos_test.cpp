@@ -12,10 +12,16 @@ TEST(StandardAtmosphereTest, TemperatureAtAltitude)
   float f = atmos::temperature_at(0);
   CHECK_APPROX(f, 15);
 
+  f = atmos::temperature_at(-5);
+  CHECK_APPROX(f, 15);
+
   f = atmos::temperature_at(5000);
   CHECK_APPROX(f, -17.47);
 
   f = atmos::temperature_at(10000);
+  CHECK_APPROX(f, -49.9);
+
+  f = atmos::temperature_at(20000);
   CHECK_APPROX(f, -49.9);
 
   f = atmos::temperature_at(2500);

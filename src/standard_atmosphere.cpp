@@ -21,6 +21,13 @@ float read_atmos_t_value(const atmos_t* k_atmos, unsigned int k_offset) {
 }
 
 float interpolate_atmos_t_value(float k_altitude, unsigned int k_offset) {
+  if (k_altitude <= STANDARD_ATMOSPHERE[0].altitude)
+    return read_atmos_t_value(&STANDARD_ATMOSPHERE[0], k_offset);
+  else if (k_altitude >=
+           STANDARD_ATMOSPHERE[STANDARD_ATMOSPHERE_SIZE - 1].altitude)
+    return read_atmos_t_value(&STANDARD_ATMOSPHERE[STANDARD_ATMOSPHERE_SIZE-1],
+                              k_offset);
+
   int index = closest_conditions_index(k_altitude);
 
   const atmos_t& conditions_low = STANDARD_ATMOSPHERE[index - 1];
