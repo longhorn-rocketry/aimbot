@@ -11,10 +11,10 @@ float simple_drag_force(const rocket_t& k_rocket, const state_t& k_state) {
 
 float net_acceleration(const rocket_t& k_rocket,
                        const state_t& k_state,
-                       float kDragForce)
+                       float k_drag_force)
 {
   float gravity = atmos::gravity_at(k_state.altitude);
-  return -(kDragForce / k_rocket.mass) - gravity;
+  return -(k_drag_force / k_rocket.mass) - gravity;
 }
 
 float simple_net_acceleration(const rocket_t& k_rocket,

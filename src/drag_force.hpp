@@ -23,7 +23,7 @@ float simple_drag_force(const rocket_t& k_rocket, const state_t& k_state);
 
 static float net_acceleration(const rocket_t& k_rocket,
                               const state_t& k_state,
-                              float kDragForce);
+                              float k_drag_force);
 
 float simple_net_acceleration(const rocket_t& k_rocket, const state_t& k_state);
 
