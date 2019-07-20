@@ -1,4 +1,4 @@
-### Aimbot
+# Aimbot
 
 An experimental control algorithm for seeking apogees with fast-burning, airbrake-equipped rockets. R&D is ongoing at the University of Texas at Austin for application in Spaceport America Cup rockets in the 10k foot category.
 
