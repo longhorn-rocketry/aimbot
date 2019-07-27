@@ -1,6 +1,7 @@
 #ifndef AIMBOT_DRAG_FORCE_HPP
 #define AIMBOT_DRAG_FORCE_HPP
 
+#include "cd_plane.hpp"
 #include "cd_profile.hpp"
 
 namespace aimbot {
@@ -13,7 +14,7 @@ typedef struct RocketProperties {
   float surface_area;
   float airbrake_surface_area;
   float drag_coefficient;
-  float nosecone_length;
+  float nose_cone_length;
   float fineness;
   float skin_roughness;
 } rocket_t;
@@ -37,6 +38,10 @@ float simple_net_acceleration(const rocket_t& k_rocket,
 float profiled_net_acceleration(const rocket_t& k_rocket,
                                 const state_t& k_state,
                                 const cd_profile_t& k_cd_profile);
+
+float planar_net_acceleration(const rocket_t& k_rocket,
+                              const state_t& k_state,
+                              const cd_plane_t& k_cd_plane);
 
 }; // end namespace aimbot
 

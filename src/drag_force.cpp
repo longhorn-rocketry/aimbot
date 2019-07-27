@@ -36,4 +36,13 @@ float profiled_net_acceleration(const rocket_t& k_rocket,
   return net_acceleration(k_rocket, k_state, drag);
 }
 
+float planar_net_acceleration(const rocket_t& k_rocket,
+                              const state_t& k_state,
+                              const cd_plane_t& k_cd_plane)
+{
+  float cd = cd_at(k_cd_plane, k_state.altitude, k_state.velocity);
+  float drag = simple_drag_force(k_rocket, k_state, cd);
+  return net_acceleration(k_rocket, k_state, drag);
+}
+
 }; // end namespace aimbot
