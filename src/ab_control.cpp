@@ -6,11 +6,13 @@ namespace aimbot {
 AirbrakeController::AirbrakeController(const abc_config_t& k_config) {
   m_config = k_config;
   m_brake_position = 0;
-  m_step_profile = new BinomialProfile(k_config.bs_profile_velocity_min,
-                                       k_config.bs_profile_velocity_max,
-                                       k_config.bs_profile_step_min,
-                                       k_config.bs_profile_step_max,
-                                       k_config.bs_profile_exp);
+  m_step_profile = new BinomialProfile(
+    k_config.bs_profile_velocity_min,
+    k_config.bs_profile_velocity_max,
+    k_config.bs_profile_step_min,
+    k_config.bs_profile_step_max,
+    k_config.bs_profile_exp
+  );
   m_step_controller = new BrakeStepController(k_config);
 }
 
@@ -36,10 +38,11 @@ float AirbrakeController::update(float k_time,
                       * util::sign(error);
 
   // Clamp to allowed range
-  if (m_brake_position > mBRAKE_POSITION_MAX)
-    m_brake_position = mBRAKE_POSITION_MAX;
-  else if (m_brake_position < mBRAKE_POSITION_MIN)
-    m_brake_position = mBRAKE_POSITION_MIN;
+  m_brake_position = util::clamp(
+    m_BRAKE_POSITION_MIN,
+    m_BRAKE_POSITION_MAX,
+    m_brake_position
+  );
 
   return m_brake_position;
 }

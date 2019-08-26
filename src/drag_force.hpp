@@ -24,6 +24,8 @@ typedef struct RocketState {
   float velocity;
 } state_t;
 
+float simple_drag_force(float k_rho, float k_vel, float k_cd, float k_sa);
+
 float simple_drag_force(const rocket_t& k_rocket,
                         const state_t& k_state,
                         float k_cd);

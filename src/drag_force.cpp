@@ -3,13 +3,21 @@
 
 namespace aimbot {
 
+float simple_drag_force(float k_rho, float k_vel, float k_cd, float k_sa) {
+  return 0.5 * k_rho * k_vel * k_vel * k_cd * k_sa;
+}
+
 float simple_drag_force(const rocket_t& k_rocket,
                         const state_t& k_state,
                         float k_cd)
 {
   float air_density = atmos::air_density_at(k_state.altitude);
-  return 0.5 * air_density * k_state.velocity * k_state.velocity
-         * k_cd * k_rocket.surface_area;
+  return simple_drag_force(
+    air_density,
+    k_state.velocity,
+    k_cd,
+    k_rocket.surface_area
+  );
 }
 
 float net_acceleration(const rocket_t& k_rocket,

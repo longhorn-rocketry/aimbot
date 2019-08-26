@@ -2,4 +2,4 @@
 
 namespace aimbot {
 
-}; // end namespace aimbot
+} // end namespace aimbot

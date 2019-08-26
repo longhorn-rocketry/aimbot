@@ -33,6 +33,6 @@ typedef struct AirbrakeControllerConfiguration {
   float bsc_amplify_profile_exp;
 } abc_config_t;
 
-};
+} // end namespace aimbot
 
 #endif

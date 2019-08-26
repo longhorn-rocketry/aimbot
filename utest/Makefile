@@ -6,16 +6,18 @@ make utest:
 	cd_schedule_test.cpp                                                         \
 	curve_gen_test.cpp                                                           \
 	ab_control_test.cpp                                                          \
+	cd_plane_test.cpp                                                            \
 	testing_util.cpp                                                             \
 	testing_util.hpp                                                             \
+	torchy_cd_plane.hpp                                                          \
 	../src/standard_atmosphere.cpp                                               \
 	../src/standard_atmosphere.hpp                                               \
 	../src/drag_force.cpp                                                        \
 	../src/drag_force.hpp                                                        \
 	../src/struct_util.cpp                                                       \
 	../src/struct_util.hpp                                                       \
-	../src/cd_schedule.cpp                                                       \
-	../src/cd_schedule.hpp                                                       \
+	../src/cd_profile.cpp                                                        \
+	../src/cd_profile.hpp                                                        \
 	../src/curve_generation.cpp                                                  \
 	../src/curve_generation.hpp                                                  \
 	../src/ab_control.cpp                                                        \
@@ -26,6 +28,8 @@ make utest:
 	../src/aimbot_util.hpp                                                       \
 	../src/profiling.cpp                                                         \
 	../src/profiling.hpp                                                         \
+	../src/cd_plane.cpp                                                          \
+	../src/cd_plane.hpp                                                          \
 	../src/config.hpp
 
 make clean:

@@ -14,8 +14,8 @@ namespace aimbot {
     int sign(T k_val) {
       return k_val < 0 ? -1 : (k_val > 0 ? 1 : 0);
     }
-  };
+  } // end namespace util
 
-}; // end namespace aimbot
+} // end namespace aimbot
 
 #endif
