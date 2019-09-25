@@ -37,7 +37,7 @@ float Engine::extrapolate(const rocket_t& k_rocket,
   if (m_extrap_method == EXTRAP_EULER)
     return extrapolate_euler(k_rocket, k_state, extension);
   else
-    return 0 / 0;
+    return -1;
 }
 
 float Engine::extrapolate_euler(const rocket_t& k_rocket,
